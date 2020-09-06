@@ -1,0 +1,30 @@
+export const design = {
+  colors: {
+    primary: '#015cab',
+    secondary: '#06345c',
+    tertiary: '#c2daef',
+    white: '#fff',
+    black: '#000',
+  },
+  spacing: {
+    0: 0,
+    1: '.5rem',
+    2: '1rem',
+    3: '1.5rem',
+    4: '2rem',
+    5: '2.5rem',
+    6: '3rem',
+    7: '3.5rem',
+    8: '4rem',
+  },
+  fontSizes: {
+    1: '.5rem',
+    2: '1rem',
+    3: '1.5rem',
+    4: '2rem',
+    5: '2.5rem',
+    6: '3rem',
+    7: '3.5rem',
+    8: '4rem',
+  },
+};

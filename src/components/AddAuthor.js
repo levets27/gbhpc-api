@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import { GET_AUTHORS } from "./AuthorList";
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
+import { GET_STATS } from './StatList';
 
 const ADD_AUTHOR = gql`
   mutation insert_author($name: String!) {
@@ -15,32 +15,32 @@ const ADD_AUTHOR = gql`
 `;
 
 const AddAuthor = () => {
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState('');
   const [insert_author, { loading, error }] = useMutation(ADD_AUTHOR, {
     update: (cache, { data }) => {
-      setAuthor("");
+      setAuthor('');
       const existingAuthors = cache.readQuery({
-        query: GET_AUTHORS
+        query: GET_STATS,
       });
 
       // Add the new author to the cache
       const newAuthor = data.insert_author.returning[0];
       cache.writeQuery({
-        query: GET_AUTHORS,
-        data: {author: [newAuthor, ...existingAuthors.author]}
+        query: GET_STATS,
+        data: { author: [newAuthor, ...existingAuthors.author] },
       });
-    }
+    },
   });
 
-  if (loading) return "loading...";
+  if (loading) return 'loading...';
   if (error) return `error: ${error.message}`;
 
   const handleSubmit = event => {
     event.preventDefault();
     insert_author({
       variables: {
-        name: author
-      }
+        name: author,
+      },
     });
   };
 
