@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 import Nav from './Nav';
-import headerLogo from '../../../assets/gbhpc-web-header.png';
+import headerLogo from '../../assets/gbhpc-web-header.png';
 
 const Header = styled.header`
   position: sticky;

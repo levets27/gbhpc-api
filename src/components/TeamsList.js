@@ -1,7 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { useQuery, gql } from '@apollo/client';
 import StarIcon from '@material-ui/icons/Star';
+import PageContainer from './Layout/PageContainer';
 import EnhancedTable from './EnhancedTable';
 
 const GET_TEAMS = gql`
@@ -38,8 +38,8 @@ const TeamsList = () => {
   if (loading) return 'loading...';
   if (error) return `error: ${error.message}`;
 
-  const teamData = data.teams.map(stat => {
-    const { id, champion, color, name, seasonBySeason, captainPlayer } = stat;
+  const teamData = data.teams.map(team => {
+    const { id, champion, color, name, seasonBySeason, captainPlayer } = team;
     return createData(
       id,
       `${seasonBySeason.year} ${seasonBySeason.season}`,
@@ -55,14 +55,16 @@ const TeamsList = () => {
   });
 
   return (
-    <EnhancedTable
-      defaultOrder="desc"
-      defaultOrderBy="ppg"
-      enablePagination
-      headCells={headCells}
-      rows={teamData}
-      tableTitle="Player Statistics"
-    />
+    <PageContainer>
+      <EnhancedTable
+        defaultOrder="desc"
+        defaultOrderBy="ppg"
+        enablePagination
+        headCells={headCells}
+        rows={teamData}
+        tableTitle="Teams"
+      />
+    </PageContainer>
   );
 };
 
